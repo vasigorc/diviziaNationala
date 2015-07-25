@@ -11,6 +11,9 @@ import com.vgorcinschi.concordiafootballmanager.customexceptions.InvalidTeamExce
 import com.vgorcinschi.concordiafootballmanager.customexceptions.PlayerAlreadyExists;
 import com.vgorcinschi.concordiafootballmanager.customexceptions.TeamSizeException;
 import com.vgorcinschi.concordiafootballmanager.model.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.*;
@@ -29,7 +32,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(classes = {RootConfig.class})
 public class TransferMarketTest {
 
-    Player igorAndronic;
+    Player igorAndronic, adrianPatras, sergiuVitu, alinSeroni, ionDemerji,
+            alexGrosu, eugenGorceac, cristianEfros, igorDima, maximSoimu,
+            ghenadieOrbu, mihaiOnicas;
     Team teamSperanta;
     @Autowired
     TransferMarket tM;
@@ -39,27 +44,37 @@ public class TransferMarketTest {
 
     @Autowired
     PlayerFactory plF;
-      
+
     @Autowired
     TeamFactory tF;
 
     @Before
     public void setUp() throws PlayerAlreadyExists {
-        try {
-            teamSperanta = tF.getTeam("Speranta Nisporeni", 1992);
-        } catch (InvalidTeamException ex) {
-            Logger.getLogger(TransferMarketTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Trainer petruEfros = null;
         try {
             igorAndronic = tM.playerGenerator("Defender", "Igor", "Andronic", 27, "Moldova", 2300);
+            adrianPatras = tM.playerGenerator("Goalkeeper", "Adrian", "Patras", 30, "Moldova", 1600);
+            sergiuVitu = tM.playerGenerator("Defender", "Sergiu", "Vitu", 23, "Moldova", 1300);
+            alinSeroni = tM.playerGenerator("Defender", "Alin", "Seroni", 28, "Moldova", 1250);
+            ionDemerji = tM.playerGenerator("Midfielder", "Ion", "Demerji", 26, "Moldova", 1400);
+            alexGrosu = tM.playerGenerator("Midfielder", "Alexandru", "Grosu", 27, "Moldova", 1850);
+            eugenGorceac = tM.playerGenerator("Midfielder", "Eugen", "Gorceac", 28, "Moldova", 1300);
+            cristianEfros = tM.playerGenerator("Midfielder", "Cristian", "Efros", 23, "Moldova", 1450);
+            igorDima = tM.playerGenerator("Midfielder", "Igor", "Dima", 22, "Moldova", 1800);
+            maximSoimu = tM.playerGenerator("Midfielder", "Maxim", "Soimu", 25, "Moldova", 1400);
+            ghenadieOrbu = tM.playerGenerator("Forward", "Ghenadie", "Orbu", 33, "Moldova", 1800);
+            mihaiOnicas = tM.playerGenerator("Midfielder", "Mihai", "Onicas", 25, "Moldova", 1900);
+            petruEfros = tM.trainerGenerator("Petru", "Efros", 50, 2400);
         } catch (InvalidSoccerDudeException ex) {
             System.out.println(ex.getMessage());
         }
-        igorAndronic.addTeam(2015, 2016, teamSperanta);
+        List<Player> players = new ArrayList<>(Arrays.asList(igorAndronic, adrianPatras, sergiuVitu, alinSeroni, ionDemerji,
+                alexGrosu, eugenGorceac, cristianEfros, igorDima, maximSoimu,
+                ghenadieOrbu, mihaiOnicas));
         try {
-            teamSperanta.addPlayer(igorAndronic);
-        } catch (TeamSizeException ex) {
-            System.out.println(ex.getMessage());
+            teamSperanta = tF.getTeam(players, petruEfros, "Speranta Nisporeni", 1992);
+        } catch (InvalidTeamException ex) {
+            Logger.getLogger(TransferMarketTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -72,7 +87,7 @@ public class TransferMarketTest {
     public void trainerFactorySThere() {
         assertNotNull(trF);
     }
-   
+
     @Test
     public void checkPlayerCurrentTeam() {
         assertEquals("Speranta Nisporeni", igorAndronic.currentTeam().toString());

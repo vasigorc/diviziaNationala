@@ -17,12 +17,17 @@ public class TeamValidator {
     public TeamValidator() {
     }
     
-    public boolean yearIsGood(){
+    private boolean yearIsGood(){
         return team.getFoundationYear()>=1950 && team.getFoundationYear()<=2015;
+    }
+    
+    private boolean hasMinimalSquad(){
+        return team.getPlayers().size()>=11;
     }
     
     public boolean isValid(Team tm){
         this.team = tm;
-        return (team!=null && yearIsGood()&& team.getName()!=null&&team.getName().length()>0);        
+        return (team!=null && yearIsGood()&& team.getName()!=null
+                && team.getName().length()>0 && hasMinimalSquad());        
     }    
 }

@@ -37,7 +37,14 @@ public class TeamFactory {
         return tempTeam;
     }
     
-    public Team getTeam(List<Player> players, Trainer tr, String name, int foundationYear){
-        return new Team(players, tr, name, foundationYear);
+    public Team getTeam(List<Player> players, Trainer tr, String name, int foundationYear) throws InvalidTeamException{
+        Team tempTeam = new Team(players,tr, name, foundationYear);
+        if(!tValid.isValid(tempTeam))
+            throw new InvalidTeamException();
+        for (Player player:players) {
+            player.addTeam(2015, 2016, tempTeam);
+        }
+        tr.addTeam(2015, 2016, tempTeam);
+        return tempTeam;
     }
 }

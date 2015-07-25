@@ -27,16 +27,7 @@ public class TestPlayer {
      and contain any digits
      */
     private final Pattern pattern = Pattern.compile("^\\D{2,20}$");
-//    public TestPlayer() {
-//    }
-//    
-//    @BeforeClass
-//    public static void setUpClass() {
-//    }
-//    
-//    @AfterClass
-//    public static void tearDownClass() {
-//    }
+
 
     @Before
     public void setUp() {
