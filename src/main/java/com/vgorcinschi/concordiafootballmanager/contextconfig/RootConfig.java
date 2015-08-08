@@ -9,8 +9,11 @@ import com.vgorcinschi.concordiafootballmanager.model.beans.*;
 import com.vgorcinschi.concordiafootballmanager.model.validators.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  *
@@ -18,7 +21,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages={"com.vgorcinschi.concordiafootballmanager.model"})
+@ComponentScan(basePackages={"com.vgorcinschi.concordiafootballmanager.model"},
+        excludeFilters={@Filter(type = FilterType.ANNOTATION, value=EnableWebMvc.class)})
 public class RootConfig {
     
     /*
