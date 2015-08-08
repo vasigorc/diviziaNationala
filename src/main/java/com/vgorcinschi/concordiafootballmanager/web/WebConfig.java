@@ -49,7 +49,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         //resolver.setExposeContextBeansAsAttributes(true);
-       // resolver.setViewClass(JstlView.class);
+        resolver.setViewClass(JstlView.class);
         return resolver;
     }
     

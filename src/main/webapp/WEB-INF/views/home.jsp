@@ -27,7 +27,7 @@
         <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="<c:url value="/resource/css/sticky-footer-navbar.css"/>" rel="stylesheet">
+        <link href="<c:url value="/resources/css/sticky-footer-navbar.css"/>" rel="stylesheet">
 
 
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
