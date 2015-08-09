@@ -24,7 +24,7 @@ public class PersonGenerationController {
         this.generator = generator;
     }
     
-    @RequestMapping(value = "createplayer", method = GET)
+    @RequestMapping(value = "/createplayer", method = GET)
     public String createPlayer(){
         return "createplayer";
     }

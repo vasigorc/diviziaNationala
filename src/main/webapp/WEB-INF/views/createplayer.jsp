@@ -17,6 +17,8 @@
     <c:set var="contact" value=""/>
     <%@include file="../jspfs/head.jspf" %>
     <body>
-        <h1>Hello World!</h1>
+        <%@include file="../jspfs/navbar.jspf" %>   
+        <h1>Hai și-om fași și noi jucători &#9786;</h1>
+        <%@include file="../jspfs/footer.jspf" %>
     </body>
 </html>
