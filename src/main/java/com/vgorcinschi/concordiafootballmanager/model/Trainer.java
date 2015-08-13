@@ -18,6 +18,7 @@ public class Trainer implements Person {
     private int age;
     private double salary;
     private List<Experience> experience;
+    private long id;
 
     public Trainer() {
         this.experience = new ArrayList<>();
@@ -90,5 +91,12 @@ public class Trainer implements Person {
     public void setAge(int age) {
         this.age = age;
     }
-    
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }    
 }

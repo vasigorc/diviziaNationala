@@ -5,12 +5,24 @@
  */
 package com.vgorcinschi.concordiafootballmanager.model;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 /**
  *
  * @author vgorcinschi
  */
 public class Statistic {
-    private int games, goals;
+    @Digits(integer=4, fraction=0, message = "{stats.games}")
+    @Max(value=9999, message = "{stats.games}")
+    @Min(value=0, message = "{stats.games}")
+    private int games; 
+    
+    @Digits(integer=4, fraction=0, message = "{stats.goals}")
+    @Max(value=9999, message = "{stats.goals}")
+    @Min(value=0, message = "{stats.goals}")
+    private int goals;
 
     public Statistic() {
         this.games = 0;

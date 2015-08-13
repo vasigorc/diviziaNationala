@@ -21,7 +21,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages={"com.vgorcinschi.concordiafootballmanager.model"},
+@ComponentScan(basePackages={"com.vgorcinschi.concordiafootballmanager.model",
+"com.vgorcinschi.concordiafootballmanager.data"},
         excludeFilters={@Filter(type = FilterType.ANNOTATION, value=EnableWebMvc.class)})
 public class RootConfig {
     

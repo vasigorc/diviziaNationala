@@ -28,6 +28,7 @@ public abstract class Player implements Person {
     protected Statistic stats;
     protected String birthCountry;
     private List<Experience> experience;
+    private long id;
 
     protected Player() {
         this.stats = new Statistic();
@@ -146,6 +147,12 @@ public abstract class Player implements Person {
         }
         return true;
     }
-    
-    
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

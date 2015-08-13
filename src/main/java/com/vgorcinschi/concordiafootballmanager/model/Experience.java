@@ -9,7 +9,7 @@ package com.vgorcinschi.concordiafootballmanager.model;
  *
  * @author vgorcinschi
  */
-class Experience {
+public class Experience {
     private int yearFrom;
     private int yearTo;
     private Team team;
