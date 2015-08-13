@@ -3,12 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vgorcinschi.concordiafootballmanager.web.views;
+package com.vgorcinschi.concordiafootballmanager.model.beans;
 
 import com.vgorcinschi.concordiafootballmanager.contextconfig.RootConfig;
+import com.vgorcinschi.concordiafootballmanager.customexceptions.InvalidSoccerDudeException;
+import com.vgorcinschi.concordiafootballmanager.data.PlayerRepository;
 import com.vgorcinschi.concordiafootballmanager.data.PlayerService;
+import com.vgorcinschi.concordiafootballmanager.model.Player;
 import com.vgorcinschi.concordiafootballmanager.model.beans.TransferMarket;
+import com.vgorcinschi.concordiafootballmanager.model.players.Defender;
 import com.vgorcinschi.concordiafootballmanager.web.WebConfig;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +26,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -29,12 +36,17 @@ import org.springframework.web.context.WebApplicationContext;
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebConfig.class, RootConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class FormSubmissionTest {
+public class RepositoryTest {
     @Autowired
     TransferMarket generator;
     
     @Autowired
     PlayerService playerService;
+    
+    @Autowired
+    PlayerRepository pr;
+    
+    Player dummy;
     
     @Autowired
     protected WebApplicationContext wac;
@@ -44,13 +56,27 @@ public class FormSubmissionTest {
     @Before
     public void setUp() {
         mockMvc = webAppContextSetup(wac).build();
+        try {
+            dummy = generator.playerGenerator("Defender", "Donald", "Duck", 23, "USA", 3000000);
+        } catch (InvalidSoccerDudeException ex) {
+            Logger.getLogger(RepositoryTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
+    
     @Test
-    public void testCreatePlayer() throws Exception {
-        mockMvc.perform(post("/createplayer")).andExpect(view().name("playerForm"));
+    public void dummyIsDef(){
+        assertThat(dummy, instanceOf(Defender.class));
     }
+    
+    @Test
+    public void dummyIsEnrobbed(){
+        playerService.savePlayer(dummy);
+        long dummyId = dummy.getId();
+        assertEquals(dummy, playerService.getPlayer(dummyId));
+    }
+//    @Test
+//    public void testCreatePlayer() throws Exception {
+//        mockMvc.perform(post("/createplayer")).andExpect(view().name("playerForm"));
+//    }
 }
