@@ -24,8 +24,8 @@
                 <h1>Choose what you want to do:</h1>
             </div>
             <div style="margin: auto; width: 50%">
-                <button onclick="location.href='<c:url value="/createplayer" />'" type="button" class="btn btn-primary btn-lg active">Create player</button>
-                <button type="button" class="btn btn-primary btn-lg active" style="position: absolute; margin-left: 5em;">Create trainer</button>
+                <button onclick="location.href='<c:url value="/createplayer" />'" type="button" class="btn btn-default btn-lg">Create player</button>
+                <button onclick="location.href='<c:url value="/createtrainer" />'" type="button" class="btn btn-default btn-lg" style="position: absolute; margin-left: 5em;">Create trainer</button>
             </div>
         <%@include file="../jspfs/footer.jspf" %>
     </body>

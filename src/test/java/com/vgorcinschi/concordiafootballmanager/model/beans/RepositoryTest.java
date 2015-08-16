@@ -9,8 +9,9 @@ import com.vgorcinschi.concordiafootballmanager.contextconfig.RootConfig;
 import com.vgorcinschi.concordiafootballmanager.customexceptions.InvalidSoccerDudeException;
 import com.vgorcinschi.concordiafootballmanager.data.PlayerRepository;
 import com.vgorcinschi.concordiafootballmanager.data.PlayerService;
+import com.vgorcinschi.concordiafootballmanager.data.TrainerService;
 import com.vgorcinschi.concordiafootballmanager.model.Player;
-import com.vgorcinschi.concordiafootballmanager.model.beans.TransferMarket;
+import com.vgorcinschi.concordiafootballmanager.model.Trainer;
 import com.vgorcinschi.concordiafootballmanager.model.players.Defender;
 import com.vgorcinschi.concordiafootballmanager.web.WebConfig;
 import java.util.logging.Level;
@@ -44,9 +45,13 @@ public class RepositoryTest {
     PlayerService playerService;
     
     @Autowired
+    TrainerService trainerService;
+    
+    @Autowired
     PlayerRepository pr;
     
     Player dummy;
+    Trainer tester;
     
     @Autowired
     protected WebApplicationContext wac;
@@ -58,6 +63,7 @@ public class RepositoryTest {
         mockMvc = webAppContextSetup(wac).build();
         try {
             dummy = generator.playerGenerator("Defender", "Donald", "Duck", 23, "USA", 3000000);
+            tester = generator.trainerGenerator("Cristophor", "Columbus", 41, 2000000);
         } catch (InvalidSoccerDudeException ex) {
             Logger.getLogger(RepositoryTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,13 +76,16 @@ public class RepositoryTest {
     }
     
     @Test
-    public void dummyIsEnrobbed(){
+    public void dummyIsStored(){
         playerService.savePlayer(dummy);
         long dummyId = dummy.getId();
         assertEquals(dummy, playerService.getPlayer(dummyId));
     }
-//    @Test
-//    public void testCreatePlayer() throws Exception {
-//        mockMvc.perform(post("/createplayer")).andExpect(view().name("playerForm"));
-//    }
+    
+    @Test
+    public void testerIsStored(){
+        trainerService.saveTraier(tester);
+        long testerId = tester.getId();
+        assertEquals(tester, trainerService.getTrainer(testerId));
+    }
 }

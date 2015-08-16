@@ -56,6 +56,6 @@ public class SoccerDudesValidator implements PersonValidator {
     
     public boolean trainerIsValid(Trainer tr){
         this.tr= tr;
-        return (tr!=null && salaryNotEmpty(tr) && nameIsValid(tr) && trainerAgeIsValid() && birthcountryIsValid());
+        return (tr!=null && salaryNotEmpty(tr) && nameIsValid(tr) && trainerAgeIsValid());
     }
 }

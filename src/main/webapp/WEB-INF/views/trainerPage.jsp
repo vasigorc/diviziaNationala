@@ -1,5 +1,5 @@
 <%-- 
-    Document   : player
+    Document   : trainer
     Created on : Aug 11, 2015, 9:10:44 PM
     Author     : vgorcinschi
 --%>
@@ -11,7 +11,7 @@
 <%@page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
-    <c:set var="title" value="${player.firstName} ${player.lastName}"/>
+    <c:set var="title" value="${trainer.firstName} ${trainer.lastName}"/>
     <c:set var="home" value=""/>
     <c:set var="about" value=""/>
     <c:set var="contact" value=""/>
@@ -19,37 +19,24 @@
 </head>
 <body>
     <%@include file="../jspfs/navbar.jspf" %>
-    <div class="media">
-
+    <div class="media">       
         <div class="media-body">
             <table class="table table-striped">
                 <tr>
                     <th scope="row">First Name*:</th>
-                    <td>${player.firstName}</td>
+                    <td>${trainer.firstName}</td>
                 </tr>
                 <tr>
                     <th scope="row">Last Name*:</th>
-                    <td>${player.lastName}</td>
+                    <td>${trainer.lastName}</td>
                 </tr>
                 <tr>
                     <th scope="row">Age*:</th>
-                    <td>${player.age}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Country*:</th>
-                    <td>${player.birthCountry}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Position*:</th>
-                    <td>${player.position}</td>
+                    <td>${trainer.age}</td>
                 </tr>
                 <tr>
                     <th scope="row">Annual Salary*:</th>
-                    <td>${player.salary}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Stats*:</th>
-                    <td>${player.stats.games} games and ${player.stats.goals} goals<br/></td>
+                    <td>${trainer.salary}</td>
                 </tr>
             </table>
             <div class="row">

@@ -8,6 +8,8 @@ package com.vgorcinschi.concordiafootballmanager.model.beans;
 import com.vgorcinschi.concordiafootballmanager.contextconfig.RootConfig;
 import com.vgorcinschi.concordiafootballmanager.data.PlayerRepository;
 import com.vgorcinschi.concordiafootballmanager.data.PlayerService;
+import com.vgorcinschi.concordiafootballmanager.data.TrainerRepository;
+import com.vgorcinschi.concordiafootballmanager.data.TrainerService;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +32,23 @@ public class DataTester {
     @Autowired
     PlayerRepository pr;    
     
+    @Autowired
+    TrainerService ts;
+    
+    @Autowired
+    TrainerRepository tr;
+    
     @Before
     public void setUp() {
     }
 
    @Test
-   public void repositoryIsThere(){
+   public void playerRepositoryIsThere(){
        assertNotNull(ps);
+   }
+   
+   @Test
+   public void trainerServiceIsThere(){
+       assertNotNull(ts);
    }
 }

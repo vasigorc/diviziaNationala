@@ -7,6 +7,7 @@ package com.vgorcinschi.concordiafootballmanager.web.views;
 
 import com.vgorcinschi.concordiafootballmanager.contextconfig.RootConfig;
 import com.vgorcinschi.concordiafootballmanager.data.PlayerService;
+import com.vgorcinschi.concordiafootballmanager.data.TrainerService;
 import com.vgorcinschi.concordiafootballmanager.model.beans.TransferMarket;
 import com.vgorcinschi.concordiafootballmanager.web.PersonGenerationController;
 import org.junit.Before;
@@ -34,6 +35,9 @@ public class CreatePlayerPageTest {
     
     @Autowired
     PlayerService playerService;
+    
+    @Autowired
+    TrainerService trainerService;
 
     private MockMvc mockMvc;
 
@@ -44,7 +48,8 @@ public class CreatePlayerPageTest {
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
 
-        mockMvc = MockMvcBuilders.standaloneSetup(new PersonGenerationController(generator, playerService))
+        mockMvc = MockMvcBuilders.standaloneSetup(new PersonGenerationController(
+                generator, playerService, trainerService))
                 .setViewResolvers(viewResolver)
                 .build();
     }
