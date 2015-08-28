@@ -53,9 +53,9 @@ public class TestExperiencedPlayer {
     
     @Test
     public void checkCurrentTeam(){
-        assertEquals("Zimbru",player.currentTeam().toString());
+        assertEquals("Zimbru",player.getCurrentTeam().toString());
         System.out.println(player.getLastName()+" "+"from "+
                 player.getBirthCountry()+" has moved to "+
-                player.currentTeam());
+                player.getCurrentTeam());
     }
 }

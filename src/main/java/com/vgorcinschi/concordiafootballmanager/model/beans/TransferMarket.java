@@ -34,7 +34,7 @@ public class TransferMarket {
         player.setAge(age);
         player.setFirstName(firstName);
         player.setLastName(lastName);
-        player.setSalary(salary);
+        player.setPureSalary(salary);
         player.setBirthCountry(birthCountry);
         if (!sdv.playerIsValid(player)) 
             throw new InvalidSoccerDudeException("Some of "+player.getLastName()+

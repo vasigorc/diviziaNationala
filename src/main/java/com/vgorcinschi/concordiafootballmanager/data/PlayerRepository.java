@@ -17,4 +17,6 @@ public interface PlayerRepository {
     Player get(long id);
     void add(Player player);
     void update(Player player);
+    void delete(Player player);
+    Player findByLastName(String lastName);
 }

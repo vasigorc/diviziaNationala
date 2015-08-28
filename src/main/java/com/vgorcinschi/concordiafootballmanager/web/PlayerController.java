@@ -28,6 +28,12 @@ public class PlayerController {
         this.playerService = playerService;
     }
     
+    @RequestMapping(method = RequestMethod.GET)
+    public String getPlayers(Model model){        
+        model.addAttribute("playerList", playerService.getAllPlayers());
+        return "allPlayers";
+    }
+    
     @RequestMapping(value="/{playerId:\\d+}", method = RequestMethod.GET)
     public String getOnePlayer(@PathVariable long playerId, Model model){
         model.addAttribute("player", playerService.getPlayer(playerId));

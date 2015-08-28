@@ -6,11 +6,14 @@
 package com.vgorcinschi.concordiafootballmanager.model.players;
 
 import com.vgorcinschi.concordiafootballmanager.model.Player;
+import javax.persistence.Entity;
 
 /**
  *
  * @author vgorcinschi
  */
+@Entity
+@SuppressWarnings("PersistenceUnitPresent")
 public class Forward extends Player {
     
     
@@ -28,5 +31,5 @@ public class Forward extends Player {
         this.salary = salary;
         this.birthCountry = birthCountry;
         this.position = "Forward";
-    }
+    }   
 }

@@ -90,9 +90,9 @@ public class TransferMarketTest {
 
     @Test
     public void checkPlayerCurrentTeam() {
-        assertEquals("Speranta Nisporeni", igorAndronic.currentTeam().toString());
+        assertEquals("Speranta Nisporeni", igorAndronic.getCurrentTeam().toString());
         System.out.println(igorAndronic.getFirstName() + " " + igorAndronic.getLastName()
-                + " is currently playing for ".concat(igorAndronic.currentTeam().toString()));
+                + " is currently playing for ".concat(igorAndronic.getCurrentTeam().toString()));
     }
 
     @Test

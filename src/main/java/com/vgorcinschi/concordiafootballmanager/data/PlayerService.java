@@ -16,4 +16,5 @@ public interface PlayerService {
     List<Player> getAllPlayers();
     Player getPlayer(long id);
     void savePlayer(Player player);
+    void deletePlayer(Player player);
 }

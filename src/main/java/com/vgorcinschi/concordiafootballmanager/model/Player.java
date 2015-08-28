@@ -6,18 +6,20 @@
 package com.vgorcinschi.concordiafootballmanager.model;
 
 import com.vgorcinschi.concordiafootballmanager.customexceptions.InvalidPositionException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
+import javax.persistence.*;
 
 /**
  *
  * @author vgorcinschi
  */
-public abstract class Player implements Person {
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "discrim",
+        discriminatorType=DiscriminatorType.STRING)
+@SuppressWarnings("PersistenceUnitPresent")
+public abstract class Player implements Person, Serializable {
 
     protected String firstName, lastName;
     protected int age;
@@ -34,25 +36,35 @@ public abstract class Player implements Person {
         this.stats = new Statistic();
         this.experience = new ArrayList<>();
     }
-
+    
     @Override
+    @Basic
     public String getFirstName() {
         return firstName;
     }
 
     @Override
+    @Basic
     public String getLastName() {
         return lastName;
     }
 
     @Override
+    @Basic
     public int getAge() {
         return age;
     }
 
     @Override
+    @Transient
     public String getSalary() {
         return euroFormatter.format(salary);
+    }
+    
+    @Basic
+    @Column(name="salary")
+    public double getPureSalary(){
+        return this.salary;
     }
 
     public void setFirstName(String firstName) {
@@ -67,7 +79,7 @@ public abstract class Player implements Person {
         this.age = age;
     }
 
-    public void setSalary(double salary) {
+    public void setPureSalary(double salary) {
         this.salary = salary;
     }
 
@@ -89,19 +101,23 @@ public abstract class Player implements Person {
                 return;
             }
         }
-        throw new InvalidPositionException(position+" is not a valid position"
+        throw new InvalidPositionException(position + " is not a valid position"
                 + " for a football player in this application.");
     }
 
+    @Basic
+    @Column(name = "Player_Position")
     public String getPosition() {
         return position;
     }
 
+    @Basic
     public String getBirthCountry() {
         return birthCountry;
     }
-    
-    public Team currentTeam() {
+
+    @Transient
+    public Team getCurrentTeam() {
         return experience.get(experience.size() - 1).getTeam();
     }
 
@@ -109,17 +125,23 @@ public abstract class Player implements Person {
         experience.add(new Experience(yearFrom, yearTo, t));
     }
 
+    @Embedded
     public Statistic getStats() {
         return stats;
     }
 
+    @Transient
     public List<Experience> getAllTeams() {
         return experience;
     }
 
     public void setBirthCountry(String birthCountry) {
         this.birthCountry = birthCountry;
-    }  
+    }
+
+    public void setStats(Statistic stats) {
+        this.stats = stats;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -141,13 +163,16 @@ public abstract class Player implements Person {
         }
         if (!Objects.equals(this.position, other.position)) {
             return false;
-        }        
+        }
         if (!Objects.equals(this.birthCountry, other.birthCountry)) {
             return false;
         }
         return true;
     }
 
+    @Id
+    @Column(name = "PlayerId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }

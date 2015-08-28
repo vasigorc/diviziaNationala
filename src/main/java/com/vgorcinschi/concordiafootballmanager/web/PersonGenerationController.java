@@ -57,6 +57,7 @@ public class PersonGenerationController {
         Player aPlayer = generator.playerGenerator(playerForm.getPosition(),
                 playerForm.getFirstName(), playerForm.getLastName(),
                 playerForm.getAge(), playerForm.getBirthCountry(), playerForm.getSalary());
+        aPlayer.setStats(playerForm.getStats());
         playerService.savePlayer(aPlayer);
         return "redirect:/player/" + aPlayer.getId();
     }

@@ -90,7 +90,7 @@ public class BetaTest {
 
     @Test
     public void checkCurrentTeam() {
-        assertEquals(denisIlescu.currentTeam(), sStoica.currentTeam());
+        assertEquals(denisIlescu.getCurrentTeam(), sStoica.currentTeam());
     }
 
     @Test(expected = PlayerAlreadyExists.class)
