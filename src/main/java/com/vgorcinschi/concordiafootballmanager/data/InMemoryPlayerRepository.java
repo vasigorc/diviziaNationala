@@ -9,6 +9,7 @@ import com.vgorcinschi.concordiafootballmanager.model.Player;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Repository;
  * @author vgorcinschi
  */
 @Repository
+@Qualifier("InMemory")
 public class InMemoryPlayerRepository implements PlayerRepository {
     private final Map<Long, Player> database = new Hashtable<>();
     private volatile long playerIdSequence = 1L;

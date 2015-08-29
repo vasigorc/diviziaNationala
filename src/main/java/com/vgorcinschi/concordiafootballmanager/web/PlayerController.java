@@ -33,6 +33,7 @@ public class PlayerController {
         model.addAttribute("playerList", playerService.getAllPlayers());
         return "allPlayers";
     }
+    //implement unit test - p. 150 from Spring in Action
     
     @RequestMapping(value="/{playerId:\\d+}", method = RequestMethod.GET)
     public String getOnePlayer(@PathVariable long playerId, Model model){

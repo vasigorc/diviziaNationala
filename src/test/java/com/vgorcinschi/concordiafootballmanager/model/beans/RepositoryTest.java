@@ -6,6 +6,7 @@
 package com.vgorcinschi.concordiafootballmanager.model.beans;
 
 import com.vgorcinschi.concordiafootballmanager.contextconfig.RootConfig;
+import com.vgorcinschi.concordiafootballmanager.customannotations.H2Schema;
 import com.vgorcinschi.concordiafootballmanager.customexceptions.InvalidSoccerDudeException;
 import com.vgorcinschi.concordiafootballmanager.data.PlayerRepository;
 import com.vgorcinschi.concordiafootballmanager.data.PlayerService;
@@ -48,6 +49,7 @@ public class RepositoryTest {
     TrainerService trainerService;
     
     @Autowired
+    @H2Schema
     PlayerRepository pr;
     
     Player dummy;

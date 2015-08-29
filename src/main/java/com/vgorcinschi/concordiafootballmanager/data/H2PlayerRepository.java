@@ -8,11 +8,11 @@ package com.vgorcinschi.concordiafootballmanager.data;
 import com.vgorcinschi.concordiafootballmanager.customannotations.H2Schema;
 import com.vgorcinschi.concordiafootballmanager.model.Player;
 import java.util.List;
-import javax.inject.Inject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +27,7 @@ public class H2PlayerRepository implements PlayerRepository {
     private final SessionFactory sessionFactory;
 
     //Session Factory is injected into this Bean
-    @Inject
+    @Autowired
     public H2PlayerRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

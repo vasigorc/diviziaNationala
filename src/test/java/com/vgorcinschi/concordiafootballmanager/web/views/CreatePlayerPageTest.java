@@ -53,10 +53,7 @@ public class CreatePlayerPageTest {
                 .setViewResolvers(viewResolver)
                 .build();
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
+    
     @Test
     public void testCreatePlayer() throws Exception {
         mockMvc.perform(get("/createplayer")).andExpect(view().name("playerForm"));
