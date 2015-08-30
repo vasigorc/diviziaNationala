@@ -12,16 +12,12 @@ import org.hibernate.validator.HibernateValidator;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.RequestToViewNameTranslator;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -30,7 +26,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -40,14 +35,15 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.vgorcinschi.concordiafootballmanager.web"/*,
-        useDefaultFilters = false,
-        includeFilters = {
-            @Filter(type = FilterType.ANNOTATION, value = org.springframework.stereotype.Controller.class),
-            @Filter(ControllerAdvice.class)}*/)
+@ComponentScan(basePackages = {"com.vgorcinschi.concordiafootballmanager.web", "com.vgorcinschi.concordiafootballmanager.rest"}/*,
+ useDefaultFilters = false,
+ includeFilters = {
+ @Filter(type = FilterType.ANNOTATION, value = org.springframework.stereotype.Controller.class),
+ @Filter(ControllerAdvice.class)}*/)
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    @Inject SpringValidatorAdapter springValidator;
+    @Inject
+    SpringValidatorAdapter springValidator;
 
     @Bean
     public ViewResolver viewResolver() {
@@ -108,8 +104,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return this.springValidator;
     }
 
-//    @Bean
-//    public RequestToViewNameTranslator viewNameTranslator() {
-//        return new DefaultRequestToViewNameTranslator();
-//    }
 }

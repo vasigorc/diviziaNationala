@@ -6,6 +6,7 @@
 package com.vgorcinschi.concordiafootballmanager.web;
 
 import com.vgorcinschi.concordiafootballmanager.contextconfig.RootConfig;
+import com.vgorcinschi.concordiafootballmanager.rest.RestServletContextConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -21,7 +22,7 @@ public class FootballManagerInitialilzer extends AbstractAnnotationConfigDispatc
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{WebConfig.class};
+        return new Class<?>[]{WebConfig.class, RestServletContextConfiguration.class};
     }
 
     @Override

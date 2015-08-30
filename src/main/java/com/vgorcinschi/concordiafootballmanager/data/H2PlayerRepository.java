@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @H2Schema
 public class H2PlayerRepository implements PlayerRepository {
-   
+
     private final SessionFactory sessionFactory;
 
     //Session Factory is injected into this Bean
@@ -61,13 +62,17 @@ public class H2PlayerRepository implements PlayerRepository {
     @Override
     @Transactional
     public Player findByLastName(String lastName) {
-        return (Player) currentSession().createCriteria(Player.class)
-                .add(Restrictions.ilike("lastName", lastName, MatchMode.ANYWHERE))
-                .uniqueResult();
+        try {
+            return (Player) currentSession().createCriteria(Player.class)
+                    .add(Restrictions.ilike("lastName", lastName, MatchMode.ANYWHERE))
+                    .uniqueResult();
+        } catch (EmptyResultDataAccessException e) {
+            throw new PlayerNotFoundException(lastName);
+        }
     }
-    
+
     @Override
-    public void delete(Player player){
+    public void delete(Player player) {
         currentSession().delete(player);
     }
 }
