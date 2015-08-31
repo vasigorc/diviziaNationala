@@ -65,6 +65,7 @@ public class TestRestApi {
          mockMvc.perform(get("/resources/player/Kokorin"))
                  .andDo(print())
                  .andExpect(status().isOk())
-                 .andExpect((ResultMatcher) content().contentType("application/json"));
+                 .andExpect((ResultMatcher) content().contentType("application/json"))
+                 .andExpect(jsonPath("$.lastName").value("Kokorin"));
      }
 }

@@ -35,7 +35,7 @@ public class RestServletContextConfiguration extends WebMvcConfigurerAdapter {
     public Jackson2ObjectMapperFactoryBean mapper(){
         Jackson2ObjectMapperFactoryBean mapperFactory = new Jackson2ObjectMapperFactoryBean();
         mapperFactory.setAutoDetectFields(false);
-        mapperFactory.setAutoDetectGettersSetters(false);
+        mapperFactory.setAutoDetectGettersSetters(true);
         return mapperFactory;
     }
 

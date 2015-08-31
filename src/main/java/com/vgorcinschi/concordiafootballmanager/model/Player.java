@@ -5,6 +5,8 @@
  */
 package com.vgorcinschi.concordiafootballmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vgorcinschi.concordiafootballmanager.customexceptions.InvalidPositionException;
 import java.io.Serializable;
 import java.util.*;
@@ -57,6 +59,7 @@ public abstract class Player implements Person, Serializable {
 
     @Override
     @Transient
+    @JsonIgnore
     public String getSalary() {
         return euroFormatter.format(salary);
     }
@@ -117,6 +120,7 @@ public abstract class Player implements Person, Serializable {
     }
 
     @Transient
+    @JsonIgnore
     public Team getCurrentTeam() {
         return experience.get(experience.size() - 1).getTeam();
     }
@@ -126,11 +130,13 @@ public abstract class Player implements Person, Serializable {
     }
 
     @Embedded
+    @JsonManagedReference
     public Statistic getStats() {
         return stats;
     }
 
     @Transient
+    @JsonIgnore
     public List<Experience> getAllTeams() {
         return experience;
     }
