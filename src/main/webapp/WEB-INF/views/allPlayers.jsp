@@ -1,3 +1,5 @@
+/* global selectPlayer */
+
 <%-- 
     Document   : player
     Created on : Aug 11, 2015, 9:10:44 PM
@@ -39,7 +41,7 @@
                         </thead>
                         <tbody>                            
                             <c:forEach varStatus="count" var="player" items="${playerList}">
-                                <tr>
+                                <tr data-bind="click: function(data){selectPlayer('${player.lastName}', data)}">
                                     <th scope="row">${count.count}</th>
                                     <td>${player.firstName}</td>
                                     <td>${player.lastName}</td>
@@ -51,7 +53,42 @@
                 </c:otherwise>
             </c:choose>
         </div>
+        <!-- ko if:hasSelectedPlayer -->
+        <div class="panel panel-primary" data-bind="with: player">
+            <div class="panel-heading">
+                <h3 class="panel-title" data-bind="text: firstName"></h3>
+            </div>
+            <div class="panel-body">
+                <span data-bind="text: position"></span>
+            </div>
+        </div>
+        <!-- /ko -->
     </div>
     <%@include file="../jspfs/footer.jspf" %>
+    <script src="<c:url value="/resources/js/knockout-3.3.0.js"/>"></script>
+    <script src="<c:url value="/resources/js/knockout.mapping-latest.js"/>"></script>
+    <script>
+        function ViewModel() {
+            var self = this;
+           
+            self.player;
+            self.hasSelectedPlayer = ko.observable(false);
+
+            self.selectPlayer = function (obs) {
+                //alert("You picked " + obs);
+                $.ajax({
+                    url: '<c:url value="/resources/player/" />'+obs,
+                    type: 'GET',
+                    contentType: 'application/json'
+                }).success(function(data){
+                    self.player = ko.mapping.fromJS(data, self);
+                    self.hasSelectedPlayer(true);
+                });
+            };
+        }
+        ;
+        var viewModel = new ViewModel();
+        ko.applyBindings(viewModel);
+    </script>
 </body>
 </html>
