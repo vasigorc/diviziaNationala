@@ -1,5 +1,3 @@
-/* global selectPlayer */
-
 <%-- 
     Document   : player
     Created on : Aug 11, 2015, 9:10:44 PM
@@ -52,14 +50,15 @@
             </c:choose>
         </div>
         <!-- ko if:hasSelectedPlayer -->
-        <div class="panel panel-primary" data-bind="with: player">
-            <div class="panel-heading">
-                <h3 class="panel-title" data-bind="text: firstName"></h3>
-            </div>
-            <div class="panel-body">
-                <span data-bind="text: position"></span>
-            </div>
-        </div>
+        <ul class="list-group" style="width: 40%;">
+            <a id="playerLink" href=""><li id="fullname" class="list-group-item list-group-item-info"></li></a>
+            <li id="position" class="list-group-item"></li>
+            <li id="nationality" class="list-group-item"></li>
+            <li id="age" class="list-group-item"></li>
+            <li class="list-group-item"><span id="games" class="badge"></span>Games:</li>
+            <li class="list-group-item"><span id="goals" class="badge"></span>Goals:</li>
+            <li class="list-group-item">Yearly wage: <span id="salary"></span> &#8364;</li>
+        </ul>
         <!-- /ko -->
     </div>
     <%@include file="../jspfs/footer.jspf" %>
@@ -68,18 +67,39 @@
     <script>
         function ViewModel() {
             var self = this;
-           
-            self.player;
+
+//            var playerOne = {
+//                "age": ko.observable(22),
+//                "birthCountry": ko.observable("Moldova"),
+//                "firstName": ko.observable("Dan"),
+//                "id": ko.observable(3),
+//                "lastName": ko.observable("Spataru"),
+//                "position": ko.observable("Midfielder"),
+//                "pureSalary": ko.observable(400000),
+//                stats:{ 
+//                "games": ko.observable(10),
+//                "goals": ko.observable(1)}
+//            };
+
+            //self.player;
             self.hasSelectedPlayer = ko.observable(false);
 
             self.selectPlayer = function (obs) {
                 //alert("You picked " + obs);
                 $.ajax({
-                    url: '<c:url value="/resources/player/" />'+obs,
+                    url: '<c:url value="/resources/player/" />' + obs,
                     type: 'GET',
                     contentType: 'application/json'
-                }).success(function(data){
-                    self.player = ko.mapping.fromJS(data, self);
+                }).success(function (data) {
+                    //self.player = ko.mapping.fromJS(data, self);
+                    $("#playerLink").attr("href", "<c:url value="/player/"/>"+data.id);
+                    $("#fullname").text(data.firstName+" "+data.lastName);
+                    $("#position").text(data.position);
+                    $("#nationality").text("Nationality: "+data.birthCountry);
+                    $("#age").text(data.age);
+                    $("#games").text(data.stats.games);
+                    $("#goals").text(data.stats.goals);
+                    $("#salary").text(data.pureSalary);
                     self.hasSelectedPlayer(true);
                 });
             };
