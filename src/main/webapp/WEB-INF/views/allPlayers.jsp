@@ -92,6 +92,7 @@
                     contentType: 'application/json'
                 }).success(function (data) {
                     //self.player = ko.mapping.fromJS(data, self);
+                    self.hasSelectedPlayer(true);
                     $("#playerLink").attr("href", "<c:url value="/player/"/>"+data.id);
                     $("#fullname").text(data.firstName+" "+data.lastName);
                     $("#position").text(data.position);
@@ -99,8 +100,7 @@
                     $("#age").text(data.age);
                     $("#games").text(data.stats.games);
                     $("#goals").text(data.stats.goals);
-                    $("#salary").text(data.pureSalary);
-                    self.hasSelectedPlayer(true);
+                    $("#salary").text(data.pureSalary);                    
                 });
             };
         }
